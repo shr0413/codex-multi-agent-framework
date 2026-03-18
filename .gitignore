@@ -1,3 +1,4 @@
 .codex-framework/
 examples/output/
 *.log
+CHECKPOINT-*.md

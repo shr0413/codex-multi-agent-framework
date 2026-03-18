@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "taskId": "normal-mode-demo",
+  "title": "Demonstrate gated normal-mode execution",
+  "mode": "normal",
+  "kind": "feature",
+  "complexity": {
+    "uncertainty": "high",
+    "fileCount": 3,
+    "stageCount": 3
+  },
+  "context": {
+    "designSummary": "Create a minimal first-run artifact that proves the framework can gate, execute, persist, and verify work.",
+    "acceptance": [
+      "Persist a run state bundle under .codex-framework/runs/",
+      "Write an execution artifact into examples/output/",
+      "Verify the artifact content before the run can complete"
+    ]
+  },
+  "plan": [
+    {
+      "id": "record-brief",
+      "title": "Record the implementation brief",
+      "type": "note",
+      "allowParallel": false,
+      "payload": {
+        "content": "Normal mode should stay simple: pass gates, execute a small plan, and refuse completion without verification evidence."
+      }
+    },
+    {
+      "id": "write-artifact",
+      "title": "Write the normal-mode artifact",
+      "type": "write_file",
+      "dependsOn": [
+        "record-brief"
+      ],
+      "files": [
+        "examples/output/normal-demo.txt"
+      ],
+      "payload": {
+        "path": "examples/output/normal-demo.txt",
+        "content": "normal mode artifact\n"
+      }
+    },
+    {
+      "id": "append-proof",
+      "title": "Append verification proof marker",
+      "type": "append_file",
+      "dependsOn": [
+        "write-artifact"
+      ],
+      "allowParallel": false,
+      "files": [
+        "examples/output/normal-demo.txt"
+      ],
+      "payload": {
+        "path": "examples/output/normal-demo.txt",
+        "content": "verified by orchestrator\n"
+      }
+    }
+  ],
+  "verification": {
+    "expectedFiles": [
+      "examples/output/normal-demo.txt"
+    ],
+    "expectedText": [
+      {
+        "path": "examples/output/normal-demo.txt",
+        "includes": [
+          "normal mode artifact",
+          "verified by orchestrator"
+        ]
+      }
+    ]
+  }
+}

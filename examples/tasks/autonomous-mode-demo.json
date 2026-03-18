@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "taskId": "autonomous-mode-demo",
+  "title": "Demonstrate baseline, iteration, rollback, and stop logic",
+  "mode": "autonomous_optimization",
+  "kind": "feature",
+  "complexity": {
+    "uncertainty": "medium",
+    "fileCount": 2,
+    "stageCount": 3
+  },
+  "context": {
+    "designSummary": "Show the controlled version of autonomous optimization: baseline first, iterate with explicit mutable files, revert non-improvements, and end with verification.",
+    "acceptance": [
+      "Measure a baseline before any mutation",
+      "Keep only iterations that improve the metric",
+      "Rollback weaker refinements automatically"
+    ]
+  },
+  "verification": {
+    "expectedFiles": [
+      "examples/output/autonomous-score.txt"
+    ],
+    "expectedText": [
+      {
+        "path": "examples/output/autonomous-score.txt",
+        "includes": [
+          "5"
+        ]
+      }
+    ]
+  },
+  "autonomousOptimization": {
+    "metric": "demo_score",
+    "mutableFiles": [
+      "examples/output/autonomous-score.txt"
+    ],
+    "evaluate": {
+      "type": "file_numeric",
+      "path": "examples/output/autonomous-score.txt",
+      "missingValue": 0
+    },
+    "iterations": [
+      {
+        "id": "improve-score",
+        "title": "Raise the score",
+        "type": "improvement",
+        "plan": [
+          {
+            "id": "set-score-five",
+            "title": "Write a stronger score candidate",
+            "type": "write_file",
+            "files": [
+              "examples/output/autonomous-score.txt"
+            ],
+            "payload": {
+              "path": "examples/output/autonomous-score.txt",
+              "content": "5"
+            }
+          }
+        ]
+      },
+      {
+        "id": "weak-refinement",
+        "title": "Attempt a weaker refinement",
+        "type": "refinement",
+        "plan": [
+          {
+            "id": "set-score-four",
+            "title": "Write a weaker candidate",
+            "type": "write_file",
+            "files": [
+              "examples/output/autonomous-score.txt"
+            ],
+            "payload": {
+              "path": "examples/output/autonomous-score.txt",
+              "content": "4"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

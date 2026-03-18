@@ -1,0 +1,15 @@
+{
+  "name": "codex-multi-agent-framework",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Controlled execution framework for Codex-style coding agents.",
+  "scripts": {
+    "test": "node tests/framework.test.mjs",
+    "run:normal": "node src/cli.mjs run examples/tasks/normal-mode-demo.json",
+    "run:autonomous": "node src/cli.mjs run examples/tasks/autonomous-mode-demo.json"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

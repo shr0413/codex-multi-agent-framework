@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "stateRoot": ".codex-framework",
+  "crossProjectLearningsRoot": "E:\\codex\\.learnings",
+  "maxFailuresBeforeEscalation": 3,
+  "verificationRequiresFreshEvidence": true,
+  "autonomousOptimization": {
+    "enabledByDefault": false,
+    "defaultMaxNoImprovementIterations": 8,
+    "defaultMaxConsecutiveFailures": 3
+  }
+}

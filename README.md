@@ -2,6 +2,42 @@
 
 更新时间：2026-03-17
 
+## 0. 第一版实现状态
+
+仓库现在已经有一个可运行的 v1 控制面实现，对应 README 里定义的最小范围：
+
+- `Process Layer` 的四个 gate
+- `State Layer` 的最小持久化结构
+- `Execution Layer` 的最小 `Orchestrator + Worker + Verifier + Watcher`
+- 普通模式 / 自治优化模式
+- 结构化事件与证据日志
+- CLI、examples、tests、配套 docs
+
+快速开始：
+
+```bash
+node src/cli.mjs run examples/tasks/normal-mode-demo.json
+node src/cli.mjs run examples/tasks/autonomous-mode-demo.json
+node tests/framework.test.mjs
+```
+
+运行时状态默认写入：
+
+```text
+.codex-framework/
+```
+
+配套文档：
+
+- `docs/framework-overview.md`
+- `docs/process-layer.md`
+- `docs/state-layer.md`
+- `docs/execution-layer.md`
+- `docs/domain-skills.md`
+- `docs/evaluation-and-stopping.md`
+- `docs/production-architecture.md`
+- `docs/roadmap.md`
+
 ## 1. 项目定义
 
 这个项目的目标，不是再做一个“很多 agent 一起聊天”的演示系统，也不是把最新论文里的 MAS runtime 原样搬进来。  
@@ -529,4 +565,3 @@ docs/
 6. 领域 skill 应该做成叶子能力，而不是反过来接管主流程。
 
 如果把这 6 句话守住，这个仓库会更像一个真正能进生产的 Codex 多智能体框架，而不是一个研究概念或 prompt 拼装品。
-
